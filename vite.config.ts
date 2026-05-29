@@ -14,6 +14,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
+        format: "iife",
+        name: "WallVisualizerBundle",
         manualChunks: undefined,
         entryFileNames: `wall-visualizer.js`,
         chunkFileNames: `wall-visualizer.js`,
