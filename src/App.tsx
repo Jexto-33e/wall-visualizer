@@ -120,6 +120,9 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
           <p className="text-[11px] uppercase tracking-[0.05em] font-medium text-[#666]">
             Curated Space Visualizer
           </p>
+          <p className="text-[10px] text-red-500 font-bold">
+            VERSION TEST 20260529-03
+          </p>
         </div>
 
         <nav className="hidden md:flex gap-8 text-xs uppercase tracking-widest font-medium items-center">
