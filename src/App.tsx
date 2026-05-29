@@ -110,7 +110,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col overflow-hidden select-none">
+    <div className="w-full h-full min-h-[850px] flex flex-col overflow-hidden select-none">
       {/* Header */}
       <header className="h-20 px-10 flex justify-between items-center border-b border-stone-200 bg-white/50 backdrop-blur-md z-50">
         <div className="flex flex-col">
@@ -391,7 +391,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
         </div>
 
         {/* Carousel Bottom Bar (Shelf) */}
-        <div className="h-[260px] bg-white/80 backdrop-blur-[10px] border-t border-stone-300 relative z-20 flex items-center px-8 gap-6">
+        <div className="h-[240px] bg-white/80 backdrop-blur-[10px] border-t border-stone-300 relative z-20 flex items-center px-8 gap-6">
           <div className="flex flex-col w-40 shrink-0 h-full justify-center">
             <h2 className="serif italic text-xl leading-tight mb-2">
               Print Carousel
