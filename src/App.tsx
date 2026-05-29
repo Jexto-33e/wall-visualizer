@@ -166,7 +166,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsCartOpen(true)}
-            className="flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-none text-xs uppercase tracking-widest font-bold"
+            className="flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-none text-xs uppercase tracking-widest font-bold border border-black"
           >
             <ShoppingCart size={14} />
             Checkout ({placedArtworks.length})
@@ -268,11 +268,11 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                   style={{
                     width:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.widthCm *
-                        4 || 120,
+                        2.5 || 120,
 
                     height:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.heightCm *
-                        4 || 160,
+                        2.5 || 160,
 
                     zIndex: 10,
                   }}
@@ -383,7 +383,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
               whileHover={{ scale: 1.02, backgroundColor: "#333" }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsCartOpen(true)}
-              className="bg-black text-white px-10 py-5 uppercase text-xs tracking-[0.15em] font-bold shadow-xl"
+              className="bg-black text-white px-10 py-5 uppercase text-xs tracking-[0.15em] font-bold shadow-xl border border-black"
             >
               Checkout Collection
             </motion.button>
@@ -391,8 +391,8 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
         </div>
 
         {/* Carousel Bottom Bar (Shelf) */}
-        <div className="h-[320px] bg-white/80 backdrop-blur-[10px] border-t border-stone-300 relative z-20 flex items-center px-8 gap-6">
-          <div className="flex flex-col w-56 shrink-0 h-full justify-center">
+        <div className="h-[260px] bg-white/80 backdrop-blur-[10px] border-t border-stone-300 relative z-20 flex items-center px-8 gap-6">
+          <div className="flex flex-col w-40 shrink-0 h-full justify-center">
             <h2 className="serif italic text-xl leading-tight mb-2">
               Print Carousel
             </h2>
@@ -591,7 +591,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                           onClick={() => removeFromWall(item.id)}
                           aria-label="Remove artwork"
                           title="Remove artwork"
-                          className="text-red-400 p-2 hover:bg-red-50 rounded-full transition-colors"
+                          className="text-red-400 p-2 hover:bg-red-50 rounded-full transition-colors border border-red-400"
                         >
                           <Trash2 size={14} />
                         </button>
@@ -617,7 +617,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                     }
                   }}
                   disabled={placedArtworks.length === 0}
-                  className="w-full bg-gallery-ink text-white py-4 rounded-xl text-xs uppercase tracking-[0.2em] font-medium hover:bg-opacity-90 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white py-4 rounded-xl text-xs uppercase tracking-[0.2em] font-medium hover:bg-opacity-90 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed border border-black"
                 >
                   Complete Checkout
                 </button>
