@@ -13,6 +13,15 @@ import {
 import { Artwork, WallPlacement } from "./types";
 import { ARTWORKS } from "./data";
 
+import Room1 from "./assets/room-scenes/Room1.jpg";
+import Room2 from "./assets/room-scenes/Room2.jpg";
+import Room5 from "./assets/room-scenes/Room5.jpg";
+import Room6 from "./assets/room-scenes/Room6.jpg";
+import Room7 from "./assets/room-scenes/Room7.jpg";
+import Room8 from "./assets/room-scenes/Room8.jpg";
+import Room9 from "./assets/room-scenes/Room9.jpg";
+import Room10 from "./assets/room-scenes/Room10.jpg";
+
 interface AppProps {
   initialProducts?: Artwork[];
   onCheckout?: (placedItems: WallPlacement[]) => void;
@@ -43,19 +52,36 @@ export default function App({
 
   const roomScenes = [
     {
-      name: "Soft Gallery",
-      image:
-        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
+      name: "Room1",
+      image: Room1,
     },
     {
-      name: "Warm Living Room",
-      image:
-        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+      name: "Room2",
+      image: Room2,
     },
     {
-      name: "Minimal Room",
-      image:
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+      name: "Room5",
+      image: Room5,
+    },
+    {
+      name: "Room6",
+      image: Room6,
+    },
+    {
+      name: "Room7",
+      image: Room7,
+    },
+    {
+      name: "Room8",
+      image: Room8,
+    },
+    {
+      name: "Room9",
+      image: Room9,
+    },
+    {
+      name: "Room10",
+      image: Room10,
     },
   ];
 
@@ -150,12 +176,12 @@ export default function App({
           <h1 className="text-2xl italic tracking-tight text-gallery-ink serif leading-none">
             Gallery Wall Visualizer
           </h1>
+          <br></br>
           <p className="text-[11px] uppercase tracking-[0.05em] font-medium text-[#666]">
             Curated Space Visualizer
           </p>
-          <p className="text-[10px] text-red-500 font-bold">
-            VERSION TEST 20260529-03
-          </p>
+          <br></br>
+          {/* here was the VERSION COMMENT FOR TESTING */}
         </div>
 
         <nav className="hidden md:flex gap-8 text-xs uppercase tracking-widest font-medium items-center">
