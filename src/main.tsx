@@ -48,11 +48,23 @@ class WallVisualizer extends HTMLElement {
     this.dispatchEvent(event);
   };
 
+  private handleRequestProducts = () => {
+    const event = new CustomEvent("request-products", {
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(event);
+  };
+
   private renderApp() {
     if (!this.root) return;
 
     this.root.render(
-      <App initialProducts={this.products} onCheckout={this.handleCheckout} />,
+      <App 
+      initialProducts={this.products} 
+      onCheckout={this.handleCheckout} 
+      onRequestProducts={this.handleRequestProducts} />,
     );
   }
 

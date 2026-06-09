@@ -16,9 +16,14 @@ import { ARTWORKS } from "./data";
 interface AppProps {
   initialProducts?: Artwork[];
   onCheckout?: (placedItems: WallPlacement[]) => void;
+  onRequestProducts?: () => void;
 }
 
-export default function App({ initialProducts = [], onCheckout }: AppProps) {
+export default function App({
+  initialProducts = [],
+  onCheckout,
+  onRequestProducts,
+}: AppProps) {
   const [placedArtworks, setPlacedArtworks] = useState<WallPlacement[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
@@ -26,6 +31,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
   const wallRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [filterType, setFilterType] = useState<string>("All");
+  const [hasStartedDesigning, setHasStartedDesigning] = useState(false);
 
   const wallColors = [
     { name: "Paper", color: "#f9f7f5" },
@@ -34,6 +40,28 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
     { name: "Warm Clay", color: "#d9cfc1" },
     { name: "Midnight", color: "#1a1a1a" },
   ];
+
+  const roomScenes = [
+    {
+      name: "Soft Gallery",
+      image:
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      name: "Warm Living Room",
+      image:
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+    },
+    {
+      name: "Minimal Room",
+      image:
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+    },
+  ];
+
+  const [selectedRoomScene, setSelectedRoomScene] = useState<string | null>(
+    null,
+  );
 
   const addToWall = (artwork: Artwork, x: number, y: number) => {
     const newPlacement: WallPlacement = {
@@ -96,7 +124,12 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
     );
   };
 
-  const artworks = initialProducts.length > 0 ? initialProducts : ARTWORKS;
+  const artworks = hasStartedDesigning
+    ? initialProducts.length > 0
+      ? initialProducts
+      : ARTWORKS
+    : [];
+
   const filteredArtworks =
     filterType === "All"
       ? artworks
@@ -190,40 +223,6 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
 
       {/* Main Experience */}
       <main className="flex-1 relative bg-gallery-bg overflow-hidden flex flex-col">
-        {/* Wall Controls */}
-        <div className="absolute top-8 left-10 z-30 flex flex-col gap-4">
-          {placedArtworks.length > 0 && (
-            <motion.button
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              onClick={() => setPlacedArtworks([])}
-              className="bg-white/80 backdrop-blur-md px-4 py-2 border border-black/5 shadow-xl text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-stone-100 text-gallery-ink transition-colors"
-            >
-              <Trash2 size={12} />
-              Clear Composition
-            </motion.button>
-          )}
-
-          <div className="flex gap-4 items-center">
-            <div className="flex gap-1.5">
-              {wallColors.slice(0, 3).map((wc) => (
-                <button
-                  key={wc.name}
-                  onClick={() => setWallColor(wc.color)}
-                  aria-label="Set Wall Color"
-                  title="Set Wall Color"
-                  className={`w-3 h-3 rounded-full transition-all ${wallColor === wc.color ? "ring-2 ring-offset-2 ring-stone-400 scale-110" : ""}`}
-                  style={{ backgroundColor: wc.color }}
-                />
-              ))}
-            </div>
-            <span className="text-[11px] uppercase tracking-[0.05em] text-[#666] font-medium">
-              Wall Texture:{" "}
-              {wallColors.find((c) => c.color === wallColor)?.name || "Custom"}
-            </span>
-          </div>
-        </div>
-
         {/* The Wall Area */}
         <div
           ref={wallRef}
@@ -233,25 +232,99 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
           }}
           className="flex-1 relative flex items-center justify-center p-12 border-b-2 border-wall-border transition-colors duration-500"
         >
+          <div
+            style={{
+              backgroundColor: "rgba(250, 247, 241, 0.88)",
+              color: "#1A1A1A",
+              border: "1px solid rgba(0,0,0,0.06)",
+              backdropFilter: "blur(12px)",
+            }}
+            className="absolute top-8 left-8 z-40 w-60 p-4 shadow-xl" // CHECK WIDTH AGAIN JUST IN CASE FOR LEFT PANNEL
+          >
+            <p className="text-[9px] uppercase tracking-[0.18em] font-bold mb-3">
+              Wall Color
+            </p>
+
+            <div className="flex gap-2 mb-6">
+              {wallColors.map((wc) => (
+                <button
+                  key={wc.name}
+                  onClick={() => {
+                    setWallColor(wc.color);
+                    setSelectedRoomScene(null);
+                  }}
+                  title={wc.name}
+                  style={{
+                    backgroundColor: wc.color,
+                    border:
+                      wallColor === wc.color && !selectedRoomScene
+                        ? "2px solid #000"
+                        : "1px solid rgba(0,0,0,0.15)",
+                  }}
+                  className="w-7 h-7 rounded-full"
+                />
+              ))}
+            </div>
+
+            <p className="text-[9px] uppercase tracking-[0.18em] font-bold mb-3">
+              Room Scene
+            </p>
+
+            <div className="grid grid-cols-2 gap-2">
+              {roomScenes.map((scene) => (
+                <button
+                  key={scene.name}
+                  onClick={() => {
+                    setSelectedRoomScene(scene.image);
+                  }}
+                  style={{
+                    border:
+                      selectedRoomScene === scene.image
+                        ? "2px solid #000"
+                        : "1px solid rgba(0,0,0,0.12)",
+                  }}
+                  className="h-14 overflow-hidden"
+                  title={scene.name}
+                >
+                  <img
+                    src={scene.image}
+                    alt={scene.name}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => {
+                setPlacedArtworks([]);
+                setSelectedRoomScene(null);
+                setWallColor(wallColors[0].color);
+              }}
+              style={{
+                backgroundColor: "#000000",
+                color: "#F5EFE6",
+                border: "1px solid #000000",
+              }}
+              className="mt-4 w-full py-2.5 text-[8px] uppercase tracking-[0.16em] font-bold"
+            >
+              Clear Wall
+            </button>
+          </div>
           <motion.div
-            animate={{ backgroundColor: wallColor }}
+            animate={{
+              backgroundColor: selectedRoomScene ? "transparent" : wallColor,
+            }}
+            style={{
+              backgroundImage: selectedRoomScene
+                ? `url(${selectedRoomScene})`
+                : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
             className="relative w-full max-w-6xl aspect-[21/9] shadow-[inset_0_2px_15px_rgba(0,0,0,0.05),0_30px_60px_-12px_rgba(0,0,0,0.1)] rounded-sm overflow-hidden flex items-center justify-center"
           >
             {/* Wall Content */}
-            <AnimatePresence>
-              {placedArtworks.length === 0 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.3 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col items-center gap-4 text-gallery-ink italic"
-                >
-                  <Plus size={48} strokeWidth={1} />
-                  <p className="text-xl">Drag artwork here to visualize</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             {/* Placed Items */}
             {placedArtworks.map((item) => {
               const selectedSize = item.artwork.sizes?.[item.selectedSizeIndex];
@@ -291,7 +364,12 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                     zIndex: 10,
                   }}
                 >
-                  <div className="relative w-full h-full shadow-[0_10px_30px_rgba(0,0,0,0.25)] border-[12px] border-black bg-white overflow-hidden transition-transform group-hover:scale-[1.02]">
+                  <div
+                    className="relative w-full h-full bg-white overflow-hidden transition-transform group-hover:scale-[1.01]"
+                    style={{
+                      boxShadow: "0 12px 30px rgba(0,0,0,0.18)",
+                    }}
+                  >
                     <img
                       src={item.artwork.imageUrl}
                       alt={item.artwork.title}
@@ -299,35 +377,56 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                       referrerPolicy="no-referrer"
                     />
                     {/* Item Toolbar */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <div
+                      style={{
+                        backgroundColor: "rgba(245, 240, 232, 0.3)",
+                      }}
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2"
+                    >
                       <button
                         onClick={() => removeFromWall(item.id)}
-                        className="p-1.5 bg-white rounded-none text-red-500 hover:bg-red-50 transition-colors"
                         title="Remove"
+                        style={{
+                          backgroundColor: "rgba(245, 240, 232, 0.72)",
+                          backdropFilter: "blur(8px)",
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-[#8B3A3A] hover:scale-105 transition-all"
                       >
-                        <Trash2 size={14} />
+                        <Trash2 size={13} />
                       </button>
                       <div
-                        className="p-1.5 bg-white rounded-none text-gallery-ink cursor-move"
                         title="Drag to move"
+                        style={{
+                          backgroundColor: "rgba(245, 240, 232, 0.72)",
+                          backdropFilter: "blur(8px)",
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-[#333] hover:scale-105 transition-all"
                       >
-                        <Move size={14} />
+                        <Move size={13} />
                       </div>
                       <button
                         onClick={() => updateSelectedSize(item.id, 1)}
                         disabled={isLargestSize}
-                        className="p-1.5 bg-white rounded-none text-gallery-ink hover:bg-stone-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: "rgba(245, 240, 232, 0.72)",
+                          backdropFilter: "blur(8px)",
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-[#333] hover:scale-105 transition-all"
                         title="Larger Size"
                       >
-                        <ZoomIn size={14} />
+                        <ZoomIn size={13} />
                       </button>
                       <button
                         onClick={() => updateSelectedSize(item.id, -1)}
                         disabled={isSmallestSize}
-                        className="p-1.5 bg-white rounded-none text-gallery-ink hover:bg-stone-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: "rgba(245, 240, 232, 0.72)",
+                          backdropFilter: "blur(8px)",
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-[#333] hover:scale-105 transition-all"
                         title="Smaller Size"
                       >
-                        <ZoomOut size={14} />
+                        <ZoomOut size={13} />
                       </button>
                     </div>
                   </div>
@@ -362,50 +461,67 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 text-gallery-ink p-10 border border-dashed border-[#A19D97] shadow-2xl z-40 text-center max-w-sm pointer-events-none"
+                style={{
+                  backgroundColor: "rgba(250, 247, 241, 0.86)",
+                  color: "#2A211C",
+                  border: "1px dashed rgba(42,33,28,0.35)",
+                  backdropFilter: "blur(8px)",
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 shadow-2xl z-40 text-center max-w-sm pointer-events-none"
               >
-                <div className="mb-4 inline-flex items-center justify-center p-3 opacity-20">
-                  <Move />
-                </div>
-                <h4 className="serif text-xl italic mb-3">Artistic Flair</h4>
-                <p className="text-[10px] uppercase tracking-[0.15em] leading-relaxed opacity-60">
-                  Drag art here to
-                  <br />
-                  create a group
+                <p className="serif text-xl italic mb-4 leading-snug">
+                  Drag print here to begin creating your space
                 </p>
+
                 <button
-                  onMouseEnter={() => setShowInstructions(false)}
-                  className="mt-8 text-[9px] uppercase tracking-[0.1em] font-bold pointer-events-auto border-b border-black/20"
+                  onClick={() => {
+                    setShowInstructions(false);
+                    setHasStartedDesigning(true);
+                    onRequestProducts?.();
+                  }}
+                  style={{
+                    backgroundColor: "#000000",
+                    color: "#F5EFE6",
+                    border: "1px solid #000000",
+                  }}
+                  className="mt-3 px-6 py-3 text-[9px] uppercase tracking-[0.18em] font-bold pointer-events-auto"
                 >
-                  Begin Session
+                  Begin Designing
                 </button>
               </motion.div>
             )}
           </AnimatePresence>
 
           {/* Checkout Floating Summary (replacing scale indicator style) */}
-          <div className="absolute bottom-10 right-10 flex items-center gap-8 z-30">
-            <div className="text-right">
-              <p className="text-[11px] uppercase tracking-[0.05em] text-[#666] mb-1 font-medium">
+          <div
+            style={{
+              backgroundColor: "rgba(245, 240, 232, 0.92)",
+              color: "#111111",
+              border: "1px solid rgba(0,0,0,0.08)",
+              backdropFilter: "blur(10px)",
+            }}
+            className="absolute bottom-10 right-10 z-30 flex items-center shadow-xl"
+          >
+            <div className="px-8 py-5 text-right border-r border-black/10">
+              <p className="text-[9px] uppercase tracking-[0.16em] opacity-60 mb-1 font-bold">
                 Set Total
               </p>
               <p className="serif text-3xl italic leading-none font-light">
                 ${calculateTotal()}.00
               </p>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+
+            <button
               onClick={() => setIsCartOpen(true)}
               style={{
-                backgroundColor: "#000000",
-                color: "#ffffff",
-                border: "1px solid #000000",
+                backgroundColor: "transparent",
+                color: "#111111",
+                border: "none",
               }}
-              className="px-10 py-5 uppercase text-xs tracking-[0.15em] font-bold shadow-xl"
+              className="px-10 py-8 uppercase text-xs tracking-[0.15em] font-bold"
             >
               Checkout Collection
-            </motion.button>
+            </button>
           </div>
         </div>
 
@@ -454,8 +570,21 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
 
             <div
               ref={carouselRef}
-              className="flex-1 overflow-x-auto flex flex-row items-start gap-10 py-6 scroll-smooth no-scrollbar px-4"
+              className="flex-1 overflow-x-auto flex flex-row items-center gap-10 py-6 scroll-smooth no-scrollbar px-4"
             >
+              {!hasStartedDesigning && (
+                <div
+                  style={{
+                    color: "#6B625B",
+                    border: "1px dashed rgba(0,0,0,0.18)",
+                    backgroundColor: "rgba(245,240,232,0.45)",
+                  }}
+                  className="w-full h-32 flex items-center justify-center text-[10px] uppercase tracking-[0.16em]"
+                >
+                  Click Begin Designing to load the collection
+                </div>
+              )}
+
               <AnimatePresence mode="popLayout">
                 {filteredArtworks.map((artwork) => (
                   <motion.div
@@ -466,7 +595,7 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                     exit={{ opacity: 0, scale: 0.9 }}
                     whileHover={{ y: -5 }}
                     whileDrag={{ zIndex: 9999, scale: 1.05 }}
-                    className="relative flex-shrink-0 w-48 cursor-grab active:cursor-grabbing group"
+                    className="relative flex-shrink-0 w-35 cursor-grab active:cursor-grabbing group"
                     drag
                     dragElastic={0}
                     dragMomentum={false}
