@@ -159,7 +159,13 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
             All
           </button>
 
-          <div className="relative ml-4 px-3 py-1 bg-black text-white rounded-full text-[10px]">
+          <div
+            style={{
+              backgroundColor: "#000000",
+              color: "#ffffff",
+            }}
+            className="relative ml-4 px-3 py-1 rounded-full text-[10px]"
+          >
             Wall: {placedArtworks.length.toString().padStart(2, "0")}
           </div>
         </nav>
@@ -169,7 +175,12 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsCartOpen(true)}
-            className="flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-none text-xs uppercase tracking-widest font-bold border border-black"
+            style={{
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              border: "1px solid #000000",
+            }}
+            className="flex items-center gap-2 px-6 py-2.5 rounded-none text-xs uppercase tracking-widest font-bold"
           >
             <ShoppingCart size={14} />
             Checkout ({placedArtworks.length})
@@ -383,10 +394,15 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
               </p>
             </div>
             <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: "#333" }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsCartOpen(true)}
-              className="bg-black text-white px-10 py-5 uppercase text-xs tracking-[0.15em] font-bold shadow-xl border border-black"
+              style={{
+                backgroundColor: "#000000",
+                color: "#ffffff",
+                border: "1px solid #000000",
+              }}
+              className="px-10 py-5 uppercase text-xs tracking-[0.15em] font-bold shadow-xl"
             >
               Checkout Collection
             </motion.button>
@@ -406,11 +422,16 @@ export default function App({ initialProducts = [], onCheckout }: AppProps) {
                 <button
                   key={type}
                   onClick={() => setFilterType(type)}
-                  className={`text-[8px] uppercase tracking-widest px-2 py-1 border transition-all ${
-                    filterType === type
-                      ? "bg-black text-white border-black"
-                      : "border-stone-200 hover:border-black/20 text-stone-500"
-                  }`}
+                  style={{
+                    backgroundColor:
+                      filterType === type ? "#000000" : "#FFFFFF",
+                    color: filterType === type ? "#FFFFFF" : "#666666",
+                    border:
+                      filterType === type
+                        ? "1px solid #000000"
+                        : "1px solid #D6D3D1",
+                  }}
+                  className="text-[8px] uppercase tracking-widest px-2 py-1 transition-all"
                 >
                   {type === "All" ? "View All" : type.split(" ")[0]}
                 </button>
