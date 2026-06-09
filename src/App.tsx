@@ -197,7 +197,7 @@ export default function App({
               backgroundColor: "#000000",
               color: "#ffffff",
             }}
-            className="relative ml-4 px-3 py-1 rounded-full text-[10px]"
+            className="relative ml-4 px-4 py-1.5 rounded-full text-[10px]"
           >
             Wall: {placedArtworks.length.toString().padStart(2, "0")}
           </div>
@@ -213,7 +213,7 @@ export default function App({
               color: "#ffffff",
               border: "1px solid #000000",
             }}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-none text-xs uppercase tracking-widest font-bold"
+            className="flex items-center gap-3 px-8 py-3 rounded-none text-xs uppercase tracking-widest font-bold"
           >
             <ShoppingCart size={14} />
             Checkout ({placedArtworks.length})
@@ -239,13 +239,13 @@ export default function App({
               border: "1px solid rgba(0,0,0,0.06)",
               backdropFilter: "blur(12px)",
             }}
-            className="absolute top-8 left-8 z-40 w-60 p-4 shadow-xl" // CHECK WIDTH AGAIN JUST IN CASE FOR LEFT PANNEL
+            className="absolute top-8 left-8 z-40 w-60 p-5 shadow-xl" // CHECK WIDTH AGAIN JUST IN CASE FOR LEFT PANNEL
           >
             <p className="text-[9px] uppercase tracking-[0.18em] font-bold mb-3">
               Wall Color
             </p>
 
-            <div className="flex gap-2 mb-6">
+            <div className="flex gap-2 mb-10">
               {wallColors.map((wc) => (
                 <button
                   key={wc.name}
@@ -270,7 +270,7 @@ export default function App({
               Room Scene
             </p>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3 mb-10">
               {roomScenes.map((scene) => (
                 <button
                   key={scene.name}
@@ -306,7 +306,7 @@ export default function App({
                 color: "#F5EFE6",
                 border: "1px solid #000000",
               }}
-              className="mt-4 w-full py-2.5 text-[8px] uppercase tracking-[0.16em] font-bold"
+              className="mt-6 w-full py-3 text-[8px] uppercase tracking-[0.16em] font-bold"
             >
               Clear Wall
             </button>
@@ -500,9 +500,14 @@ export default function App({
               border: "1px solid rgba(0,0,0,0.08)",
               backdropFilter: "blur(10px)",
             }}
-            className="absolute bottom-10 right-10 z-30 flex items-center shadow-xl"
+            className="absolute bottom-10 right-10 z-30 flex items-stetch shadow-xl"
           >
-            <div className="px-8 py-5 text-right border-r border-black/10">
+            <div
+              style={{
+                borderRight: "1px solid rgba(0,0,0,0.12)",
+              }}
+              className="px-10 py-6 text-right"
+            >
               <p className="text-[9px] uppercase tracking-[0.16em] opacity-60 mb-1 font-bold">
                 Set Total
               </p>
@@ -518,7 +523,7 @@ export default function App({
                 color: "#111111",
                 border: "none",
               }}
-              className="px-10 py-8 uppercase text-xs tracking-[0.15em] font-bold"
+              className="px-12 py-8 uppercase text-xs tracking-[0.15em] font-bold"
             >
               Checkout Collection
             </button>
@@ -527,13 +532,18 @@ export default function App({
 
         {/* Carousel Bottom Bar (Shelf) */}
         <div className="h-[240px] bg-white/80 backdrop-blur-[10px] border-t border-stone-300 relative z-20 flex items-center px-8 gap-6">
-          <div className="flex flex-col w-40 shrink-0 h-full justify-center">
-            <h2 className="serif italic text-xl leading-tight mb-2">
+          <div
+            className="flex flex-col w-44 shrink-0 h-full justify-center"
+            style={{
+              color: "#1A1A1A",
+            }}
+          >
+            <h2 className="serif italic text-xl leading-tight mb-4">
               Print Carousel
             </h2>
 
             {/* Filter UI */}
-            <div className="flex flex-wrap gap-2 mt-1">
+            <div className="flex flex-wrap gap-2 mt-1 mb-4">
               {["All", "Paper Print", "Canvas Print"].map((type) => (
                 <button
                   key={type}
@@ -547,14 +557,14 @@ export default function App({
                         ? "1px solid #000000"
                         : "1px solid #D6D3D1",
                   }}
-                  className="text-[8px] uppercase tracking-widest px-2 py-1 transition-all"
+                  className="text-[8px] uppercase tracking-widest px-2 py-2 transition-all"
                 >
                   {type === "All" ? "View All" : type.split(" ")[0]}
                 </button>
               ))}
             </div>
 
-            <p className="text-[10px] text-[#666] uppercase tracking-[0.05em] leading-relaxed mt-4 opacity-70">
+            <p className="text-[10px] text-[#666] uppercase tracking-[0.05em] leading-relaxed mt-2 opacity-70">
               Scroll through the collection and drag art to your wall.
             </p>
           </div>
@@ -686,9 +696,18 @@ export default function App({
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
+              style={{
+                backgroundColor: "#F7F6F3",
+                color: "#1A1A1A",
+              }}
               className="relative w-full max-w-md bg-gallery-bg h-full shadow-2xl rounded-3xl overflow-hidden flex flex-col pointer-events-auto border-l border-white/20"
             >
-              <div className="p-8 border-b border-black/5 flex justify-between items-center bg-white/50">
+              <div
+                style={{
+                  padding: "32px 40px",
+                }}
+                className="border-b border-black/5 flex justify-between items-center bg-white/50"
+              >
                 <h2 className="text-2xl tracking-tight">
                   Your Wall Collection
                 </h2>
@@ -754,7 +773,12 @@ export default function App({
                 )}
               </div>
 
-              <div className="p-8 bg-white border-t border-black/5 space-y-6">
+              <div
+                style={{
+                  padding: "32px 40px",
+                }}
+                className="bg-white border-t border-black/5 space-y-6"
+              >
                 <div className="flex justify-between items-end">
                   <span className="text-[10px] uppercase tracking-widest font-bold opacity-40">
                     Total Value
@@ -770,7 +794,16 @@ export default function App({
                     }
                   }}
                   disabled={placedArtworks.length === 0}
-                  className="w-full bg-black text-white py-4 rounded-xl text-xs uppercase tracking-[0.2em] font-medium hover:bg-opacity-90 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed border border-black"
+                  style={{
+                    backgroundColor:
+                      placedArtworks.length === 0 ? "#000000" : "#000000",
+                    color: "#ffffff",
+                    border: "1px solid #000000",
+                    opacity: placedArtworks.length === 0 ? 0.35 : 1,
+                    cursor:
+                      placedArtworks.length === 0 ? "not-allowed" : "pointer",
+                  }}
+                  className="w-full py-4 rounded-xl text-xs uppercase tracking-[0.2em] font-medium shadow-lg"
                 >
                   Complete Checkout
                 </button>
