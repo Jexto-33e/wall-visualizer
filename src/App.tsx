@@ -13,15 +13,6 @@ import {
 import { Artwork, WallPlacement } from "./types";
 import { ARTWORKS } from "./data";
 
-import Room1 from "./assets/room-scenes/Room1.jpg";
-import Room2 from "./assets/room-scenes/Room2.jpg";
-import Room5 from "./assets/room-scenes/Room5.jpg";
-import Room6 from "./assets/room-scenes/Room6.jpg";
-import Room7 from "./assets/room-scenes/Room7.jpg";
-import Room8 from "./assets/room-scenes/Room8.jpg";
-import Room9 from "./assets/room-scenes/Room9.jpg";
-import Room10 from "./assets/room-scenes/Room10.jpg";
-
 interface AppProps {
   initialProducts?: Artwork[];
   onCheckout?: (placedItems: WallPlacement[]) => void;
@@ -53,35 +44,35 @@ export default function App({
   const roomScenes = [
     {
       name: "Room1",
-      image: Room1,
+      image: "/room-scenes/Room1.jpg",
     },
     {
       name: "Room2",
-      image: Room2,
+      image: "/room-scenes/Room2.jpg",
     },
     {
       name: "Room5",
-      image: Room5,
+      image: "/room-scenes/Room5.jpg",
     },
     {
       name: "Room6",
-      image: Room6,
+      image: "/room-scenes/Room6.jpg",
     },
     {
       name: "Room7",
-      image: Room7,
+      image: "/room-scenes/Room7.jpg",
     },
     {
       name: "Room8",
-      image: Room8,
+      image: "/room-scenes/Room8.jpg",
     },
     {
       name: "Room9",
-      image: Room9,
+      image: "/room-scenes/Room9.jpg",
     },
     {
       name: "Room10",
-      image: Room10,
+      image: "/room-scenes/Room10.jpg",
     },
   ];
 
