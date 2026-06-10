@@ -344,6 +344,13 @@ export default function App({
             {/* Placed Items */}
             {placedArtworks.map((item) => {
               const selectedSize = item.artwork.sizes?.[item.selectedSizeIndex];
+              console.log("PLACED SIZE DEBUG:", {
+                title: item.artwork.title,
+                selectedSizeIndex: item.selectedSizeIndex,
+                selectedSize,
+                widthPx: selectedSize?.widthCm * 2.5,
+                heightPx: selectedSize?.heightCm * 2.5,
+              });
               const isSmallestSize = item.selectedSizeIndex === 0;
               const isLargestSize =
                 item.selectedSizeIndex === item.artwork.sizes.length - 1;
@@ -371,11 +378,11 @@ export default function App({
                   style={{
                     width:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.widthCm *
-                        2.5 || 120,
+                        2.3 || 120,
 
                     height:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.heightCm *
-                        2.5 || 160,
+                        2.3 || 160,
 
                     zIndex: 10,
                   }}
