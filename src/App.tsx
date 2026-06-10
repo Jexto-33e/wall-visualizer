@@ -633,11 +633,12 @@ export default function App({
                       if (!rect) return;
 
                       const dropX = info.point.x;
-                      const dropY = info.point.y;
+                      const dropY = info.point.y - window.scrollY;
 
-                      console.log("DROP TEST:", {
+                      console.log("DROP TEST FIXED:", {
                         dropX,
                         dropY,
+                        scrollY: window.scrollY,
                         wallRect: rect,
                       });
 
@@ -647,7 +648,7 @@ export default function App({
                         dropY >= rect.top &&
                         dropY <= rect.bottom;
 
-                      console.log("INSIDE WALL?", isInsideWall);
+                      console.log("INSIDE WALL FIXED?", isInsideWall);
 
                       if (isInsideWall) {
                         const x = dropX - rect.left - rect.width / 2;
