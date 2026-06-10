@@ -17,12 +17,14 @@ interface AppProps {
   initialProducts?: Artwork[];
   onCheckout?: (placedItems: WallPlacement[]) => void;
   onRequestProducts?: () => void;
+  onGoToCart?: () => void;
 }
 
 export default function App({
   initialProducts = [],
   onCheckout,
   onRequestProducts,
+  onGoToCart,
 }: AppProps) {
   const [placedArtworks, setPlacedArtworks] = useState<WallPlacement[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -821,8 +823,8 @@ export default function App({
                 </div>
                 <button
                   onClick={() => {
-                    if (onCheckout) {
-                      onCheckout(placedArtworks);
+                    if (onGoToCart) {
+                      onGoToCart();
                     }
                   }}
                   disabled={placedArtworks.length === 0}
