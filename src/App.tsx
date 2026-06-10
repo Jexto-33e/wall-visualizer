@@ -635,11 +635,19 @@ export default function App({
                       const dropX = info.point.x;
                       const dropY = info.point.y;
 
+                      console.log("DROP TEST:", {
+                        dropX,
+                        dropY,
+                        wallRect: rect,
+                      });
+
                       const isInsideWall =
                         dropX >= rect.left &&
                         dropX <= rect.right &&
                         dropY >= rect.top &&
                         dropY <= rect.bottom;
+
+                      console.log("INSIDE WALL?", isInsideWall);
 
                       if (isInsideWall) {
                         const x = dropX - rect.left - rect.width / 2;
