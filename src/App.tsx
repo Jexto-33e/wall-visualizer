@@ -378,11 +378,11 @@ export default function App({
                   style={{
                     width:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.widthCm *
-                        2 || 120,
+                        1.5 || 120,
 
                     height:
                       item.artwork.sizes?.[item.selectedSizeIndex]?.heightCm *
-                        2 || 160,
+                        1.5 || 160,
 
                     zIndex: 10,
                   }}
