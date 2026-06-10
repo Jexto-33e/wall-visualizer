@@ -144,11 +144,7 @@ export default function App({
     );
   };
 
-  const artworks = hasStartedDesigning
-    ? initialProducts.length > 0
-      ? initialProducts
-      : ARTWORKS
-    : [];
+  const artworks = hasStartedDesigning ? initialProducts : [];
 
   const filteredArtworks =
     filterType === "All"
