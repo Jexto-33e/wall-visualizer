@@ -44,35 +44,43 @@ export default function App({
   const roomScenes = [
     {
       name: "Room1",
-      image: "/room-scenes/Room1.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room1.jpg",
     },
     {
       name: "Room2",
-      image: "/room-scenes/Room2.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room2.jpg",
     },
     {
       name: "Room5",
-      image: "/room-scenes/Room5.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room5.jpg",
     },
     {
       name: "Room6",
-      image: "/room-scenes/Room6.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room6.jpg",
     },
     {
       name: "Room7",
-      image: "/room-scenes/Room7.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room7.jpg",
     },
     {
       name: "Room8",
-      image: "/room-scenes/Room8.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room8.jpg",
     },
     {
       name: "Room9",
-      image: "/room-scenes/Room9.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room9.jpg",
     },
     {
       name: "Room10",
-      image: "/room-scenes/Room10.jpg",
+      image:
+        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room10.jpg",
     },
   ];
 
