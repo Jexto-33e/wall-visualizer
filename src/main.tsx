@@ -57,15 +57,6 @@ class WallVisualizer extends HTMLElement {
     this.dispatchEvent(event);
   };
 
-  private handleGoToCart = () => {
-    const event = new CustomEvent("go-to-cart", {
-      bubbles: true,
-      composed: true,
-    });
-
-    this.dispatchEvent(event);
-  };
-
   private renderApp() {
     if (!this.root) return;
 
@@ -74,7 +65,6 @@ class WallVisualizer extends HTMLElement {
         initialProducts={this.products}
         onCheckout={this.handleCheckout}
         onRequestProducts={this.handleRequestProducts}
-        onGoToCart={this.handleGoToCart}
       />,
     );
   }
