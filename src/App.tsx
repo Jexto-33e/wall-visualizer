@@ -41,46 +41,41 @@ export default function App({
     { name: "Midnight", color: "#1a1a1a" },
   ];
 
+  const ASSET_BASE =
+    "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@main/dist";
+
   const roomScenes = [
     {
       name: "Room1",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room1.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room1.jpg`,
     },
     {
       name: "Room2",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room2.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room2.jpg`,
     },
     {
       name: "Room5",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room5.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room5.jpg`,
     },
     {
       name: "Room6",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room6.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room6.jpg`,
     },
     {
       name: "Room7",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room7.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room7.jpg`,
     },
     {
       name: "Room8",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room8.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room8.jpg`,
     },
     {
       name: "Room9",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room9.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room9.jpg`,
     },
     {
       name: "Room10",
-      image:
-        "https://cdn.jsdelivr.net/gh/Jexto-33e/wall-visualizer@21ee77820afe810e72d200231ff57d48fd5b18d2/dist/room-scenes/Room10.jpg",
+      image: `${ASSET_BASE}/room-scenes/Room10.jpg`,
     },
   ];
 
