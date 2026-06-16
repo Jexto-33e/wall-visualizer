@@ -32,6 +32,7 @@ export default function App({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [filterType, setFilterType] = useState<string>("All");
   const [hasStartedDesigning, setHasStartedDesigning] = useState(false);
+  const [visibleProductCount, setVisibleProductCount] = useState(25);
 
   const wallColors = [
     { name: "Paper", color: "#f9f7f5" },
@@ -130,6 +131,8 @@ export default function App({
   };
 
   useEffect(() => {
+    setVisibleProductCount(25);
+
     if (carouselRef.current) {
       carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
     }
@@ -150,6 +153,9 @@ export default function App({
     filterType === "All"
       ? artworks
       : artworks.filter((artwork) => artwork.type === filterType);
+
+  const visibleArtworks = filteredArtworks.slice(0, visibleProductCount);
+  const canLoadMore = visibleProductCount < filteredArtworks.length;
 
   const scrollCarousel = (direction: "left" | "right") => {
     if (carouselRef.current) {
@@ -619,7 +625,7 @@ export default function App({
               )}
 
               <AnimatePresence mode="popLayout">
-                {filteredArtworks.map((artwork) => (
+                {visibleArtworks.map((artwork) => (
                   <motion.div
                     key={artwork.id}
                     //layout
@@ -696,6 +702,23 @@ export default function App({
                     </div>
                   </motion.div>
                 ))}
+                {canLoadMore && (
+                  <button
+                    onClick={() => setVisibleProductCount((prev) => prev + 25)}
+                    style={{
+                      backgroundColor: "rgba(245, 240, 232, 0.92)",
+                      color: "#111111",
+                      border: "1px solid rgba(0,0,0,0.18)",
+                      padding: "18px 26px",
+                      minWidth: "150px",
+                      height: "120px",
+                      alignSelf: "center",
+                    }}
+                    className="relative flex-shrink-0 uppercase text-[10px] tracking-[0.16em] font-bold shadow-sm"
+                  >
+                    Load More
+                  </button>
+                )}
               </AnimatePresence>
             </div>
 
